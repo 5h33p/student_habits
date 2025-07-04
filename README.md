@@ -1,8 +1,8 @@
-1. Introduction
-3. Body
-    1. Data
-    1. Methods
-    1. Analysis
-    2.  Results
-5. Conclusion
-6. Appendix
+# 1 Introduction
+# 2 Body
+## 2.1 Data
+## 2.2 Methods
+## 2.3 Analysis
+## 2.4 Results
+# 3 Conclusion
+# 4 Appendix
