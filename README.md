@@ -2,12 +2,12 @@
 
 The main goal of this project is to create a machine learning model capable of predicting students' grades based on their habits.  
 The process includes:
-- [Data Gathering](##2.1-getting-data)  
-- [Exploratory Analysis](##2.2-exploratory-analysis)  
-- [Preprocessing](#2.3-preprocessing-data)  
-- [Feature/Model Selection](#2.4-feature-selection)  
-- [Pipeline Creation](#2.5-pipeline)  
-- [Result Analysis](#2-6-results)  
+- [Data Gathering](#21-getting-data)  
+- [Exploratory Analysis](#22-exploratory-analysis)  
+- [Preprocessing](#23-preprocessing-data)  
+- [Feature/Model Selection](#24-feature-selection)  
+- [Pipeline Creation](#25-pipeline)  
+- [Result Analysis](#26-results)  
 
 In summary, the project
 
