@@ -5,9 +5,9 @@ The process includes:
 - [Data Gathering](#21-getting-data)  
 - [Exploratory Analysis](#22-exploratory-analysis)  
 - [Preprocessing](#23-preprocessing-data)  
-- [Feature/Model Selection](#24-feature/model-selection)  
-- [Pipeline Creation](#25-model_training_pipeline)  
-- [Result Analysis](#26-evaluation_results)  
+- [Feature/Model Selection](#24-featuremodel-selection)  
+- [Pipeline Creation](#25-model-training-pipeline)  
+- [Result Analysis](#26-evaluation-results)  
 
 In summary, the project
 
