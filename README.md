@@ -9,7 +9,7 @@ The process includes:
 - [Pipeline Creation](#25-model-training-pipeline)  
 - [Result Analysis](#26-evaluation-results)  
 
-In summary, the project
+In summary, the project is
 
 # 2 Body
 
