@@ -1,3 +1,17 @@
+# 🧠 Student Grade Predictor
+
+This project predicts student exam scores using machine learning based on their lifestyle and habits. 
+
+📌 **Key Steps**
+- Data preprocessing (scaling, encoding)
+- EDA (heatmaps, scatter plots)
+- Model training with pipelines (Linear Regression, Ridge, Lasso, SVR)
+- Performance evaluation (R², MSE, MAE)
+- Comparison with dummy baseline
+
+📊 **Tools:** Python, Pandas, Scikit-learn, Seaborn
+
+
 # 1 Introduction
 
 The main goal of this project is to create a machine learning model capable of predicting students' grades based on their habits.  
