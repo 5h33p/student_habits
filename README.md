@@ -5,21 +5,26 @@ The process includes:
 - [Data Gathering](#21-getting-data)  
 - [Exploratory Analysis](#22-exploratory-analysis)  
 - [Preprocessing](#23-preprocessing-data)  
-- [Feature/Model Selection](#24-featuremodel-selection)  
-- [Pipeline Creation](#25-model-training-pipeline)  
-- [Result Analysis](#26-evaluation-results)  
+- [Feature/Model Selection](#24-featuremodel-selection)
+- [Model Train and Test](#25-model-train-and-test)
+- [Pipeline Creation](#26-model-training-pipeline)  
+- [Result Evaluation](#27-evaluation-results)  
 
-In summary, the project is
+In summary, the trained model was able to get better results than a dummy model used by compairison. The Python notebook [Development](./Development.ipynb) is divided according to the sections presented in this document.
 
 # 2 Body
 
-This section presents the process of getting and processing the data, as well as the methods used to select the features and the regression model.
+This section presents the process of getting, processing and loading the data (ETL), as well as the methods used to select the features, create the regression model, search for the best hyperparameters, train the final model, create the pipeline and evaluate the results based on the results of a dummy model.
 
 ## 2.1 Getting Data
+
+Firstly, the data was extracted from a [Kaggle repository](https://www.kaggle.com/datasets/aryan208/student-habits-and-academic-performance-dataset)
+
 ## 2.2 Exploratory Analysis
 ## 2.3 Preprocessing Data
 ## 2.4 Feature/Model Selection
-## 2.5 Model Training Pipeline
-## 2.6 Evaluation Results
+## 2.5 Model Train and Test
+## 2.6 Model Training Pipeline
+## 2.7 Evaluation Results
 # 3 Conclusion
 # 4 Appendix
