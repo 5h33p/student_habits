@@ -33,15 +33,15 @@ The heatmap results demonstrate that the *exam_score* column has some correlatio
 |Feature|Correlation|
 | --- | --- |
 |[*study_hours_per_day*](#study-hours-plot)|  +
-|*sleep_hours* |  +
+|[*sleep_hours*](#sleep-hours-plot) |  +
 |*exercise_frequency* |  +
-|*previous_gpa* |  +
-|*stress_level*|  -
-|*screen_time* |  +
-|*motivation_level* |  +
-|*exam_anxiety_score*|  -
+|[*previous_gpa*](#previous-gpa-plot) |  +
+|[*stress_level*](#stress-level-plot)|  -
+|[*screen_time*](#screen-time-plot) |  +
+|[*motivation_level*](#motivation-level-plot) |  +
+|[*exam_anxiety_score*](#exam-anxiety-plot)|  -
 
-After that analysis, some correlation scatter plots were created to better visualize the two variables correlation.
+A correlation scatter plot is available for most of these features in the [Appendix](#appendix) section. No further exploratory analysis was conducted on the data.
 
 ## 2.3 Preprocessing Data
 ## 2.4 Feature/Model Selection
