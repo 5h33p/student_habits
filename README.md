@@ -14,13 +14,16 @@ In summary, the trained model was able to get better results than a dummy model 
 
 # 2 Body
 
-This section presents the process of getting, processing and loading the data (ETL), as well as the methods used to select the features, create the regression model, search for the best hyperparameters, train the final model, create the pipeline and evaluate the results based on the results of a dummy model.
+This section presents the process of getting, processing and loading the data (**ETL**), as well as the methods used to **select the features**, **create the regression model**, **search** for the **best hyperparameters**, **train the final model**, **create the pipeline** and **evaluate** the **results** based on the results of a dummy model.
 
 ## 2.1 Getting Data
 
-Firstly, the data was extracted from a [Kaggle repository](https://www.kaggle.com/datasets/aryan208/student-habits-and-academic-performance-dataset)
+Firstly, the data was extracted from a [Kaggle repository](https://www.kaggle.com/datasets/aryan208/student-habits-and-academic-performance-dataset) and the first rolls printed to check the data columns, rows and null values. A copy of the dataframe was also uploaded in case the kaggle dataset source is no more available. The dataframe has 31 columns, which of them 30 are features (student_id, age, gender, etc.) and one is the target (exame_score).
 
 ## 2.2 Exploratory Analysis
+
+This section presents the exploratory analysis conducted in order to visualize any correlation
+
 ## 2.3 Preprocessing Data
 ## 2.4 Feature/Model Selection
 ## 2.5 Model Train and Test
