@@ -22,7 +22,13 @@ Firstly, the data was extracted from a [Kaggle repository](https://www.kaggle.co
 
 ## 2.2 Exploratory Analysis
 
-This section presents the exploratory analysis conducted in order to visualize any correlation
+This section presents the exploratory analysis conducted in order to visualize any correlation between features and exame score. In order to achieve this result, heat maps and scatter plots were applied on the data.
+
+
+The numerical features were separated and their correlation were summarized in a [heat map](#heatmap) presented next.
+
+<img id='heatmap' width="1272" height="766" alt="image" src="https://github.com/user-attachments/assets/c3e4bdb4-bc6b-44f0-883e-c29fca363734" />
+
 
 ## 2.3 Preprocessing Data
 ## 2.4 Feature/Model Selection
