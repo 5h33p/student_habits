@@ -10,7 +10,7 @@ The process includes:
 - [Pipeline Creation](#26-model-training-pipeline)  
 - [Result Evaluation](#27-evaluation-results)  
 
-In summary, the trained model was able to get better results than a dummy model used by compairison. The Python notebook [Development](./Development.ipynb) is divided according to the sections presented in this document.
+In summary, the trained model was able to get better results than a dummy model used by comparison. The Python notebook [Development](./Development.ipynb) is divided according to the sections presented in this document.
 
 # 2 Body
 
@@ -18,14 +18,14 @@ This section presents the process of getting, processing and loading the data (*
 
 ## 2.1 Getting Data
 
-Firstly, the data was extracted from a [Kaggle repository](https://www.kaggle.com/datasets/aryan208/student-habits-and-academic-performance-dataset) and the first rolls printed to check the data columns, rows and null values. A copy of the dataframe was also uploaded in case the kaggle dataset source is no more available. The dataframe has 31 columns, which of them 30 are features (*student_id*, *age*, *gender*, etc.) and one is the target (*exame_score*).
+Firstly, the data was extracted from a [Kaggle repository](https://www.kaggle.com/datasets/aryan208/student-habits-and-academic-performance-dataset) and the first rolls were printed to check the data columns, rows and null values. A copy of the dataframe was also uploaded in case the kaggle dataset source is no more available. The dataframe has 31 columns, which of them 30 are features (*student_id*, *age*, *gender*, etc.) and one is the target (*exame_score*).
 
 ## 2.2 Exploratory Analysis
 
 This section presents the exploratory analysis conducted in order to visualize any correlation between features and exame score. In order to achieve this result, heat maps and scatter plots were applied on the data.
 
 
-The numerical features were separated and their correlation were summarized in a [heatmap](#heatmap) showed next.
+The numerical features were separated and their correlation summarized in the [heatmap](#heatmap) showed next.
 
 <img id='heatmap' width="1272" height="766" alt="image" src="https://github.com/user-attachments/assets/c3e4bdb4-bc6b-44f0-883e-c29fca363734" />
 
@@ -44,12 +44,18 @@ The heatmap results demonstrate that the *exam_score* column has some correlatio
 A correlation scatter plot is available for most of these features in the [Appendix](#appendix) section. No further exploratory analysis was conducted on the data.
 
 ## 2.3 Preprocessing Data
+This section shows the preprocess applied to the dataset, applying feature **scaling**.
+
 ## 2.4 Feature/Model Selection
 ## 2.5 Model Train and Test
 ## 2.6 Model Training Pipeline
 ## 2.7 Evaluation Results
 # 3 Conclusion
 # 4 Appendix
+
+## Previous GPA Plot
+<img id='previous gpa plot' width="1238" height="855" alt="image" src="https://github.com/user-attachments/assets/a5e14030-2b62-44ac-9444-efdc22ee232f" />
+
 
 ## Exam Anxiety Plot
 <img id='exam anxiety plot' width="1238" height="855" alt="image" src="https://github.com/user-attachments/assets/8a9e6560-d744-44fa-9eee-768be78480f7" />
