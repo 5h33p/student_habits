@@ -18,17 +18,30 @@ This section presents the process of getting, processing and loading the data (*
 
 ## 2.1 Getting Data
 
-Firstly, the data was extracted from a [Kaggle repository](https://www.kaggle.com/datasets/aryan208/student-habits-and-academic-performance-dataset) and the first rolls printed to check the data columns, rows and null values. A copy of the dataframe was also uploaded in case the kaggle dataset source is no more available. The dataframe has 31 columns, which of them 30 are features (student_id, age, gender, etc.) and one is the target (exame_score).
+Firstly, the data was extracted from a [Kaggle repository](https://www.kaggle.com/datasets/aryan208/student-habits-and-academic-performance-dataset) and the first rolls printed to check the data columns, rows and null values. A copy of the dataframe was also uploaded in case the kaggle dataset source is no more available. The dataframe has 31 columns, which of them 30 are features (*student_id*, *age*, *gender*, etc.) and one is the target (*exame_score*).
 
 ## 2.2 Exploratory Analysis
 
 This section presents the exploratory analysis conducted in order to visualize any correlation between features and exame score. In order to achieve this result, heat maps and scatter plots were applied on the data.
 
 
-The numerical features were separated and their correlation were summarized in a [heat map](#heatmap) presented next.
+The numerical features were separated and their correlation were summarized in a [heatmap](#heatmap) showed next.
 
 <img id='heatmap' width="1272" height="766" alt="image" src="https://github.com/user-attachments/assets/c3e4bdb4-bc6b-44f0-883e-c29fca363734" />
 
+The heatmap results demonstrate that the *exam_score* column has some correlation with the following numerical features:
+|Feature|Correlation|
+| --- | --- |
+|[*study_hours_per_day*](#study-hours-plot)|  +
+|*sleep_hours* |  +
+|*exercise_frequency* |  +
+|*previous_gpa* |  +
+|*stress_level*|  -
+|*screen_time* |  +
+|*motivation_level* |  +
+|*exam_anxiety_score*|  -
+
+After that analysis, some correlation scatter plots were created to better visualize the two variables correlation.
 
 ## 2.3 Preprocessing Data
 ## 2.4 Feature/Model Selection
@@ -37,3 +50,21 @@ The numerical features were separated and their correlation were summarized in a
 ## 2.7 Evaluation Results
 # 3 Conclusion
 # 4 Appendix
+
+## Exam Anxiety Plot
+<img id='exam anxiety plot' width="1238" height="855" alt="image" src="https://github.com/user-attachments/assets/8a9e6560-d744-44fa-9eee-768be78480f7" />
+
+## Stress Level Plot
+<img id='stress level plot' width="1238" height="855" alt="image" src="https://github.com/user-attachments/assets/d3719c79-4dc4-4532-ac6d-af4175121870" />
+
+## Sleep Hours Plot
+<img id='sleep hours plot' width="1238" height="855" alt="image" src="https://github.com/user-attachments/assets/c72d58f3-42ea-4737-a7f2-e1fa918a33af" />
+
+## Screen Time Plot
+<img id='screen time plot' width="1238" height="855" alt="image" src="https://github.com/user-attachments/assets/d936cbc6-1957-4b8f-bdb4-72b8c35902ce" />
+
+## Motivation Level Plot
+<img id='motivation level plot' width="1238" height="855" alt="image" src="https://github.com/user-attachments/assets/d5bd8c6f-c951-4aa0-a292-61e7fcd9c80f" />
+
+## Study Hours Plot
+<img id='study hours plot' width="1238" height="855" alt="image" src="https://github.com/user-attachments/assets/5748d195-40ba-4884-8289-8652c3dad4ea" />
