@@ -36,10 +36,10 @@ Firstly, the data was extracted from a [Kaggle repository](https://www.kaggle.co
 
 ## 2.2 Exploratory Analysis
 
-This section presents the exploratory analysis conducted in order to visualize any correlation between features and exame score. In order to achieve this result, heat maps and scatter plots were applied on the data.
+This section presents the exploratory analysis conducted to visualize correlation between features and exame score. In order to achieve this result, heat maps and scatter plots were applied on the data.
 
 
-The numerical features were separated and their correlation summarized in the [heatmap](#heatmap) showed next.
+The numerical features were separated and their correlation summarized in the [heatmap](#heatmap) shown below.
 
 <img id='heatmap' width="1272" height="766" alt="image" src="https://github.com/user-attachments/assets/c3e4bdb4-bc6b-44f0-883e-c29fca363734" />
 
@@ -58,10 +58,10 @@ The heatmap results demonstrate that the *exam_score* column has some correlatio
 A correlation scatter plot is available for most of these features in the [Appendix](#appendix) section. No further exploratory analysis was conducted on the data.
 
 ## 2.3 Preprocessing Data
-This section shows the preprocess applied to the dataset, applying feature **scaling**.
+This section shows the preprocessing applied to the dataset, applying feature **scaling**.
 
 
-Firstly the each column was converted to the right data type, between (float64, int64 or object). The Sklearn function `ColumnTransformer()` used in the preprocessing needs the categorical and numerical features to be named, leading to the classification between **categorical** and **numerical features**. The process demands less lines, since the entire dataset already had the right data types. The entire preprocessing step is shown below.
+Firstly each column was converted to the right data type, between (float64, int64 or object). The Sklearn function `ColumnTransformer()` used in the preprocessing needs the categorical and numerical features to be named, leading to the classification between **categorical** and **numerical features**. The process demands fewer lines, since the entire dataset already had the right data types. The entire preprocessing step is shown below.
 
 ```python
 # Separating features from scores
@@ -89,7 +89,7 @@ X = pd.DataFrame(X, columns=processor.get_feature_names_out())
 Once the features are preprocessed, we can move on to the next step since this is a regression model and therefore there is no need of scaling the output.
 
 ## 2.4 Feature Selection
-This section demonstrates the process of **feature selection**, where four different feature selection methods where employed:
+This section demonstrates the process of **feature selection**, where four different feature selection methods were employed:
 - Information Gain
 - Fisher's Score
 - Correlation Coefficient
@@ -116,9 +116,9 @@ The ten features selected to train the model were the mode (most frequent featur
 - *motivation_level*: a motivation score of the student ranging from 0 to 10
 - *study_hours_per_day*: number of hours studied by the student
 - *exam_anxiety_score*: an anxiety score ranging from 0 to 10
-- *screen_time*: number of hours spend by the student on a screen
+- *screen_time*: number of hours spent by the student on a screen
 - *study_environment_Dorm*: whether the student's study environment is his dormitory
-- *access_to_tutoring_Yes*: whether the student has access extraclass classes
+- *access_to_tutoring_Yes*: whether the student has access extracurricular classes
 - *stress_level*: a stress level score of the student ranging from 0 to 10
 - *dropout_risk_Yes*: whether the student has dropout risk
 - *sleep_hours*: daily hours of sleep of the student
@@ -135,7 +135,7 @@ This section presents the training process, as well as the metrics used to selec
   X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=8)
   ```
 
-In order to get the best model and hyperparameters, the `GridSearchCV()` method from the sklearn library was applyied to the three regression models with the following search grids.
+In order to get the best model and hyperparameters, the `GridSearchCV()` method from the sklearn library was applied to the three regression models with the following search grids.
 
 ### LinearRegression
 |*fit_intercept*|
@@ -163,7 +163,7 @@ In order to get the best model and hyperparameters, the `GridSearchCV()` method 
 |10|
 |100|
 
-The *threading* library was used to process the grid search in paralel. The best results of each search is presented below.
+The *threading* library was used to process the grid search in parallel. The best results of each search is presented below.
 Model| Hyperparameters|	Train Score|	Test Score|
 |---|---|---|---|
 LinearRegression	|*fit_intercept*: True	|0.87063|	0.86906
@@ -172,7 +172,61 @@ Lasso	|*alpha*: 0.01|	0.87065|	0.86907
 
 As shown in the table, the best estimator is Lasso, with a higher score in both the *train_data* and *test_data*. The best model has the hyperparameter *alpha* set to 0.01.
 ## 2.6 Model Training Pipeline
+
+This section shows the creation of a `Pipeline` object to resume the process presented.
+
+The code used to create and fit the `Pipeline` is the following.
+```python
+final_preprocessor = ColumnTransformer(
+    transformers=[('num', StandardScaler(), num_columns),
+                  ('cat', OneHotEncoder(handle_unknown='ignore', drop='first'), cat_columns)])
+
+
+final_pipeline = Pipeline([('scaler', final_preprocessor),
+                          ('selector', SelectKBest(f_classif, k=10)),
+                          ('model', Lasso(alpha=0.01, random_state=8))])
+
+
+
+final_pipeline.fit(data.drop(columns='exam_score'), y)
+final_pipeline.score(X, y)
+```
+
 ## 2.7 Evaluation Results
+This section presents the metrics used to evaluate the trained model.
+
+A `DummyRegressor` from the sklearn library was created using the **median** as strategy and its performance was compared to the final pipeline object over the metrics below.
+- Mean Squared Error (MSE)
+- Mean Absolute Error (MSA)
+- R2 Score
+
+The resulting plot is shown below.
+
+<img width="1502" height="806" alt="image" src="https://github.com/user-attachments/assets/3fafb308-bd79-407f-a34e-b4583d3c1c69" />
+
+The final model had a better performance than the dummy model, i.e. the final model presented less total error in both, the training and test set, as well as a better R2 score of about 0.87. This result demonstrates that the ML model obtained is meaningful, it can describe the data and make new predictions. The exact values presented in the graph are shown next.
+
+|Final Model|Train Score |Test Score |
+|---|---|--- |
+|Mean Absolute Error| 3.195566| 3.199250|
+|Mean Squared Error |17.424589| 17.381873|
+|R2 Score |0.870698| 0.869077
+
+
+|Dummy Model|Train Score| Test Score |
+|---|---|--- |
+Mean Absolute Error| 9.187828| 9.108313 |
+|Mean Squared Error |149.778484| 147.137563 |
+|R2 Score |-0.111456 |-0.108260
+
+
+<img width="1255" height="701" alt="image" src="https://github.com/user-attachments/assets/1604c146-3931-46b7-8122-83b89c9efe43" />
+
+
+<img width="1201" height="701" alt="image" src="https://github.com/user-attachments/assets/4b44cb36-b6cc-4330-9833-40e5106c3874" />
+
+<img width="1233" height="701" alt="image" src="https://github.com/user-attachments/assets/de512038-1c73-4989-9254-44e5bd42a5f3" />
+
 # 3 Conclusion
 # 4 Appendix
 
