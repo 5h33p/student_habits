@@ -19,7 +19,7 @@ The process includes:
 - [Data Gathering](#21-getting-data)  
 - [Exploratory Analysis](#22-exploratory-analysis)  
 - [Preprocessing](#23-preprocessing-data)  
-- [Feature/Model Selection](#24-featuremodel-selection)
+- [Feature Selection](#24-feature-selection)
 - [Model Train and Test](#25-model-train-and-test)
 - [Pipeline Creation](#26-model-training-pipeline)  
 - [Result Evaluation](#27-evaluation-results)  
@@ -64,34 +64,73 @@ This section shows the preprocess applied to the dataset, applying feature **sca
 Firstly the each column was converted to the right data type, between (float64, int64 or object). The Sklearn function `ColumnTransformer()` used in the preprocessing needs the categorical and numerical features to be named, leading to the classification between **categorical** and **numerical features**. The process demands less lines, since the entire dataset already had the right data types. The entire preprocessing step is shown below.
 
 ```python
+# Separating features from scores
 X = data.drop('exam_score', axis=1)
 y = data.exam_score
 data.study_hours_per_day = data.study_hours_per_day.astype(float)
 categorical_data = X.loc[:, (X.dtypes=='object') | (X.dtypes=='category')] #Getting categorical data to preprocess
 # print(categorical_data.nunique())
 
-# Separeting categorical and numerical data column names
-
+# Separating categorical and numerical data column names
 cat_columns = categorical_data.columns
 num_columns = X.drop(cat_columns, axis=1).columns
 
+# Creating ColumnTransformer object
 preprocessor = ColumnTransformer(
     transformers=[('num', StandardScaler(), num_columns),
                   ('cat', OneHotEncoder(handle_unknown='ignore', drop='first'), cat_columns)])
 
+# Fitting preprocessor to the data
 processor = preprocessor.fit(X)
-
 X = processor.transform(X)
 X = pd.DataFrame(X, columns=processor.get_feature_names_out())
 ```
 
 Once the features are preprocessed, we can move on to the next step since this is a regression model and therefore there is no need of scaling the output.
 
-## 2.4 Feature/Model Selection
-This section demonstrates the process of **feature and model selection**, where four different feature selection methods where employed:
-- 
+## 2.4 Feature Selection
+This section demonstrates the process of **feature selection**, where four different feature selection methods where employed:
+- Information Gain
+- Fisher's Score
+- Correlation Coefficient
+- Variance Threshold
+
+The next table presents the ten best features according to each feature selection method.
+
+| | Info | Fisher | Correlation | Variance
+-- | -- |-- |-- |-- |
+1 | previous_gpa |previous_gpa| previous_gpa| social_activity
+2 |motivation_level |motivation_level |motivation_level |exam_anxiety_score
+3 |exam_anxiety_score |study_hours_per_day |study_hours_per_day| social_media_hours
+4 |study_hours_per_day| exam_anxiety_score |exam_anxiety_score |screen_time
+5 |screen_time |screen_time |screen_time |time_management_score
+6 |study_environment_Dorm |study_environment_Dorm| study_environment_Dorm| parental_support_level
+7 |sleep_hours |access_to_tutoring_Yes |access_to_tutoring_Yes |stress_level
+8 |stress_level |stress_level |stress_level |mental_health_rating
+9 |social_activity |dropout_risk_Yes |study_environment_Quiet Room |student_id
+10 |attendance_percentage_90.0| sleep_hours |sleep_hours| age
+
+The ten features selected to train the model were the mode (most frequent features) from the results. The selected features are presented in the folowing list.
+
+- previous_gpa: the student's last grade
+- motivation_level: a motivation score of the student ranging from 0 to 10
+- study_hours_per_day: number of hours studied by the student
+- exam_anxiety_score: an anxiety score ranging from 0 to 10
+- screen_time: number of hours spend by the student on a screen
+- study_environment_Dorm: whether the student's study environment is his dormitory
+- access_to_tutoring_Yes: wheter the student has access extraclass classes
+- stress_level: a stress level score of the student ranging from 0 to 10
+- dropout_risk_Yes: whether the student has dropout risk
+- sleep_hours: daily hours of sleep of the student
 
 ## 2.5 Model Train and Test
+
+This section presents the training process, as well as the metrics used to select the regression model. In order to get the best model, 3 different regression models were considered and tested:
+- Linear Regression
+- Lasso
+- Ridge
+
+
 ## 2.6 Model Training Pipeline
 ## 2.7 Evaluation Results
 # 3 Conclusion
