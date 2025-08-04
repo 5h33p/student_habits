@@ -60,7 +60,37 @@ A correlation scatter plot is available for most of these features in the [Appen
 ## 2.3 Preprocessing Data
 This section shows the preprocess applied to the dataset, applying feature **scaling**.
 
+
+Firstly the each column was converted to the right data type, between (float64, int64 or object). The Sklearn function `ColumnTransformer()` used in the preprocessing needs the categorical and numerical features to be named, leading to the classification between **categorical** and **numerical features**. The process demands less lines, since the entire dataset already had the right data types. The entire preprocessing step is shown below.
+
+```python
+X = data.drop('exam_score', axis=1)
+y = data.exam_score
+data.study_hours_per_day = data.study_hours_per_day.astype(float)
+categorical_data = X.loc[:, (X.dtypes=='object') | (X.dtypes=='category')] #Getting categorical data to preprocess
+# print(categorical_data.nunique())
+
+# Separeting categorical and numerical data column names
+
+cat_columns = categorical_data.columns
+num_columns = X.drop(cat_columns, axis=1).columns
+
+preprocessor = ColumnTransformer(
+    transformers=[('num', StandardScaler(), num_columns),
+                  ('cat', OneHotEncoder(handle_unknown='ignore', drop='first'), cat_columns)])
+
+processor = preprocessor.fit(X)
+
+X = processor.transform(X)
+X = pd.DataFrame(X, columns=processor.get_feature_names_out())
+```
+
+Once the features are preprocessed, we can move on to the next step since this is a regression model and therefore there is no need of scaling the output.
+
 ## 2.4 Feature/Model Selection
+This section demonstrates the process of **feature and model selection**, where four different feature selection methods where employed:
+- 
+
 ## 2.5 Model Train and Test
 ## 2.6 Model Training Pipeline
 ## 2.7 Evaluation Results
