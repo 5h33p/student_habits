@@ -20,11 +20,11 @@ The process includes:
 - [Exploratory Analysis](#22-exploratory-analysis)  
 - [Preprocessing](#23-preprocessing-data)  
 - [Feature Selection](#24-feature-selection)
-- [Model Train and Test](#25-model-train-and-test)
+- [Model Training and Test](#25-model-training-and-test)
 - [Pipeline Creation](#26-model-training-pipeline)  
 - [Result Evaluation](#27-evaluation-results)  
 
-In summary, the trained model was able to get better results than a dummy model used by comparison. The Python notebook [Development](./Development.ipynb) is divided according to the sections presented in this document.
+In summary, the trained model was able to get better results (R² = 0.87) than a dummy model used by comparison. The Python notebook [Development](./Development.ipynb) is divided according to the sections presented in this document. In the [Conclusion section](#3-conclusion) there are some improvements observed by myself that can be made in future ML projects.
 
 # 2 Body
 
@@ -32,14 +32,14 @@ This section presents the process of getting, processing and loading the data (*
 
 ## 2.1 Getting Data
 
-Firstly, the data was extracted from a [Kaggle repository](https://www.kaggle.com/datasets/aryan208/student-habits-and-academic-performance-dataset) and the first rows were printed to check the data columns, rows and null values. A copy of the dataframe was also uploaded in case the kaggle dataset source is no more available. The dataset contains 31 columns: 30 feature variables (e.g., *student_id*, *age*, *gender*, etc.) and 1 target variable (*exam_score*).
+Firstly, the data is extracted from a [Kaggle repository](https://www.kaggle.com/datasets/aryan208/student-habits-and-academic-performance-dataset) and the first rows are printed to check the data columns, rows and null values. A copy of the dataframe is also uploaded in case the Kaggle dataset source is no longer available. The dataset contains 31 columns: 30 feature variables (e.g., *student_id*, *age*, *gender*, etc.) and 1 target variable (*exam_score*).
 
 ## 2.2 Exploratory Analysis
 
-This section presents the exploratory analysis conducted to visualize correlation between features and exame score. In order to achieve this result, heat maps and scatter plots were applied on the data.
+This section presents the exploratory analysis conducted to visualize correlation between features and exam score. In order to achieve this result, heat maps and scatter plots are applied on the data.
 
 
-The numerical features were separated and their correlation summarized in the [heatmap](#heatmap) shown below.
+The numerical features are separated and their correlation summarized in the [heatmap](#heatmap) shown below.
 
 <img id='heatmap' width="1272" height="766" alt="image" src="https://github.com/user-attachments/assets/c3e4bdb4-bc6b-44f0-883e-c29fca363734" />
 
@@ -61,7 +61,7 @@ A correlation scatter plot is available for most of these features in the [Appen
 This section shows the preprocessing applied to the dataset, applying feature **scaling**.
 
 
-Firstly each column was converted to the right data type, between (float64, int64 or object). The Sklearn function `ColumnTransformer()` used in the preprocessing needs the categorical and numerical features to be named, leading to the classification between **categorical** and **numerical features**. The process demands fewer lines, since the entire dataset already had the right data types. The entire preprocessing step is shown below.
+Firstly, each column is converted to the right data type, between (`float64`, `int64` or `object`). The Scikit-learn function `ColumnTransformer()` used in the preprocessing needs the categorical and numerical features to be named, leading to the classification between **categorical** and **numerical features**. The process demands less lines, since the entire dataset already has the right data types. The entire preprocessing step is shown below.
 
 ```python
 # Separating features from scores
@@ -123,14 +123,14 @@ The ten features selected to train the model were the mode (most frequent featur
 - *dropout_risk_Yes*: whether the student has dropout risk
 - *sleep_hours*: daily hours of sleep of the student
 
-## 2.5 Model Train and Test
+## 2.5 Model Training and Test
 
 This section presents the training process, as well as the metrics used to select the regression model. In order to get the best model, 3 different regression models were considered and tested:
 - Linear Regression
 - Lasso
 - Ridge
 
-  Firstly the dataset was divided into train and test sets using the `train_test_split()` function, where 20% of the data was used as test data and the `random_state` parameter was set to 8 for reproducibility, as shown below.
+  Firstly, the dataset was divided into train and test sets using the `train_test_split()` function, where 20% of the data was used as test data and the `random_state` parameter was set to 8 for reproducibility, as shown below.
   ```python
   X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=8)
   ```
@@ -163,7 +163,7 @@ In order to get the best model and hyperparameters, the `GridSearchCV()` method 
 |10|
 |100|
 
-The *threading* library was used to process the grid search in parallel. The best results of each search is presented below.
+The *threading* library was used to process the grid search in parallel. The best results of each search are presented below.
 Model| Hyperparameters|	Train Score|	Test Score|
 |---|---|---|---|
 LinearRegression	|*fit_intercept*: True	|0.87063|	0.86906
@@ -198,7 +198,7 @@ This section presents the metrics used to evaluate the trained model.
 A `DummyRegressor` from the sklearn library was created using the **median** as strategy and its performance was compared to the final pipeline object over the metrics below.
 - Mean Squared Error (MSE)
 - Mean Absolute Error (MSA)
-- R2 Score
+- R² Score
 
 The resulting plot is shown below.
 
@@ -219,15 +219,30 @@ Mean Absolute Error| 9.187828| 9.108313 |
 |Mean Squared Error |149.778484| 147.137563 |
 |R2 Score |-0.111456 |-0.108260
 
+The next histogram presents the distribution of residuals with the model developed. It's noticeable that the frequency peak is around +2 points, i.e. the model frequently predicts less than the actual exam score the student has / had.
 
 <img width="1255" height="701" alt="image" src="https://github.com/user-attachments/assets/1604c146-3931-46b7-8122-83b89c9efe43" />
 
+To measure the accuracy of the model, since the residuals follow a normal distribution pattern with relatively low variance, the box plot shown below presents two tolerance bands that include a part of the interquartile range (IQR). The ±2 score points tolerance band brings the model's predictions to roughly 50% of accuracy.
 
 <img width="1201" height="701" alt="image" src="https://github.com/user-attachments/assets/4b44cb36-b6cc-4330-9833-40e5106c3874" />
+
+In order to check how accuracy improves based on the tolerance range, the plot shwon next was created. It's possible to see that the accuracy improvement stagnates around ±10 to ±12 score points, with an accuracy over ≈95%, making it the best tolerance prediction margins.
 
 <img width="1233" height="701" alt="image" src="https://github.com/user-attachments/assets/de512038-1c73-4989-9254-44e5bd42a5f3" />
 
 # 3 Conclusion
+
+As presented, the model can assimilate the data well. It's possible to vary the tolerance in order to get more precise outcomes, achieving more than 95% accuracy between ±10 to ±12 points. It's important to keep in mind that this project was made with studying purposes only, to show and improve my skills as an ML developer. Some traits that should be thought about in the next projects are:
+- **Better defining data types of each column**: one must spend more time changing the column types to the right ones, specially the boolean variables, that must be, as better practice, kept out of the encoding and scaling process.
+- **Checking for correlations between the categorical features and the target**
+- **Comparing models with different numbers of features**
+- **Trying using a DeepLearning model as regression model**
+- **Include more statistical insights in the exploratory analysis and in the model evaluation**
+- **Filter outliers from data**
+- **Deploy model via Flask**
+- **Integrate with SQL databases**
+
 # 4 Appendix
 
 ## Previous GPA Plot
